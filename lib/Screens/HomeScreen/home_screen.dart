@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tp_1/models/book.dart'; // Ensure this matches your project name
+import 'package:tp_1/models/book.dart';
 import 'home_cell.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<Book> books;
+
+  const HomeScreen({super.key, required this.books});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            HomeCell(
-              book: Book('Crime et Châtiment', 30, 'assets/Crime et chatiment.jpg'),
-            ),
-            HomeCell(
-              book: Book('L\'Homme qui Voulait Être Heureux', 25, 'assets/L\'homme qui voulait etre heureux.jpg'),
-            ),
-            HomeCell(
-              book: Book('Les Misérables', 40, 'assets/Les miserables.jpg'),
-            ),
-          ],
+          children: books.map((book) => HomeCell(book: book)).toList(),
         ),
       ),
     );

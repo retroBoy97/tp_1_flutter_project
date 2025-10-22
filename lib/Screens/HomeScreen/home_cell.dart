@@ -35,7 +35,7 @@ class HomeCell extends StatelessWidget {
                   book.name,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -43,7 +43,7 @@ class HomeCell extends StatelessWidget {
                   '${book.price} TND',
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 24,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
