@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tp_1/models/book.dart';
 import 'library_cell.dart';
+import '../DetailsScreen/details_screen.dart';
 
 class LibraryScreen extends StatelessWidget {
   final List<Book> books;
@@ -35,7 +36,12 @@ class LibraryScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                // Tapping does nothing for now
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsScreen(book: books[index]),
+                  ),
+                );
               },
               child: LibraryCell(book: books[index]),
             );
