@@ -18,7 +18,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  uses-material-design: true
+
   assets:
-    - assets/Crime et chatiment.jpg
-    - assets/L'homme qui voulait etre heureux.jpg
-    - assets/Les miserables.jpg
+    - assets/
