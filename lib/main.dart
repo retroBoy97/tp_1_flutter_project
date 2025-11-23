@@ -3,6 +3,8 @@ import 'screens/signup_screen.dart';
 import 'screens/HomeScreen/home_screen.dart';
 import 'screens/DetailsScreen/details_screen.dart';
 import 'screens/Library/library_screen.dart';
+import 'screens/basket_screen.dart';
+import 'screens/bottom_nav_bar.dart';
 import 'models/book.dart';
 
 void main() {
@@ -29,9 +31,11 @@ class MyApp extends StatelessWidget {
       // Déclaration des routes
       routes: {
         SignUpScreen.routeName: (context) => SignUpScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(books: sampleBooks),
+        HomeScreen.routeName: (context) => BottomNavBar(books: sampleBooks),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(books: sampleBooks),
+        BasketScreen.routeName: (context) => const BasketScreen(),
+        '/bottomNavBar': (context) => BottomNavBar(books: sampleBooks),
       },
     );
   }

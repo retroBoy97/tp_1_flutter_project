@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tp_1/models/book.dart';
-import 'home_cell.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const String routeName = "/home";
-  final List<Book> books;
+class BasketScreen extends StatelessWidget {
+  static const String routeName = "/basket";
 
-  const HomeScreen({super.key, required this.books});
+  const BasketScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           color: const Color.fromARGB(255, 33, 107, 235),
           child: const SafeArea(
             child: Text(
-              "Store INSAT",
+              "Panier",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
@@ -28,10 +25,15 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: books.map((book) => HomeCell(book: book)).toList(),
+        const Expanded(
+          child: Center(
+            child: Text(
+              'Votre panier est vide',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
             ),
           ),
         ),

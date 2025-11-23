@@ -164,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            Navigator.pushReplacementNamed(context, '/home');
+                            Navigator.pushReplacementNamed(context, '/bottomNavBar');
                           },
                           child: const Text("Continue to Books"),
                         ),
