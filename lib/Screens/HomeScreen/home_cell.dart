@@ -19,8 +19,6 @@ class HomeCell extends StatelessWidget {
         onTap: () {
           print(book.name);
           
-          // Test both navigation methods
-          // You can uncomment one of these methods to test:
           
           // Method 1: Normal Route
           // Navigator.push(
@@ -30,7 +28,7 @@ class HomeCell extends StatelessWidget {
           //   ),
           // );
           
-          // Method 2: Named Route (currently active)
+          // Method 2: Named Route 
           Navigator.pushNamed(
             context,
             DetailsScreen.routeName,
