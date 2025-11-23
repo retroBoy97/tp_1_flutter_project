@@ -5,6 +5,7 @@ import 'screens/DetailsScreen/details_screen.dart';
 import 'screens/Library/library_screen.dart';
 import 'screens/basket_screen.dart';
 import 'screens/bottom_nav_bar.dart';
+import 'screens/tab_bar_screen.dart';
 import 'models/book.dart';
 
 void main() {
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(books: sampleBooks),
         BasketScreen.routeName: (context) => const BasketScreen(),
-        '/bottomNavBar': (context) => BottomNavBar(books: sampleBooks),
+        BottomNavBar.routeName: (context) => BottomNavBar(books: sampleBooks),
+        TabBarScreen.routeName: (context) => TabBarScreen(books: sampleBooks),
       },
     );
   }

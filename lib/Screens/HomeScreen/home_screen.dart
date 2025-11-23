@@ -10,32 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
-          color: const Color.fromARGB(255, 33, 107, 235),
-          child: const SafeArea(
-            child: Text(
-              "Store INSAT",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: books.map((book) => HomeCell(book: book)).toList(),
-            ),
-          ),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: books.map((book) => HomeCell(book: book)).toList(),
+      ),
     );
   }
 }
