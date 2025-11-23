@@ -4,6 +4,7 @@ import 'library_cell.dart';
 import '../DetailsScreen/details_screen.dart';
 
 class LibraryScreen extends StatelessWidget {
+  static const String routeName = "/library";
   final List<Book> books;
 
   const LibraryScreen({super.key, required this.books});
@@ -36,11 +37,11 @@ class LibraryScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
+                // Using Named Route Navigation
+                Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(book: books[index]),
-                  ),
+                  DetailsScreen.routeName,
+                  arguments: books[index],
                 );
               },
               child: LibraryCell(book: books[index]),

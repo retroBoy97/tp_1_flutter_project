@@ -5,9 +5,10 @@ import 'package:tp_1/models/book.dart';
 int quantity = 10;
 
 class DetailsScreen extends StatefulWidget {
-  final Book book;
+  static const String routeName = "/Details";
+  Book? book;
 
-  const DetailsScreen({super.key, required this.book});
+  DetailsScreen({super.key, this.book});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -16,11 +17,14 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    if (!mounted) return Container();
+    final Book book = (widget.book ?? ModalRoute.of(context)?.settings.arguments) as Book;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 33, 107, 235),
         title: Text(
-          widget.book.name,
+          book.name,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -37,7 +41,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
-                  widget.book.image,
+                  book.image,
                   width: 250,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) => const Icon(
@@ -79,7 +83,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "${widget.book.price.toString()} TND",
+                "${book.price.toString()} TND",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

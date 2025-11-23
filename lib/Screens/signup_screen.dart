@@ -162,8 +162,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           "User added successfully! Check your inbox"),
                       actions: [
                         TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pushReplacementNamed(context, '/home');
+                          },
+                          child: const Text("Continue to Books"),
                         ),
                       ],
                     ),
