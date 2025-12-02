@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tp_1/models/book.dart';
+import 'package:tp_1/services/book_service.dart';
 
 // Variable globale pour la quantité
 int quantity = 10;
@@ -105,6 +106,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 setState(() {
                   if (quantity > 0) {
                     quantity--;
+                    
+                    BookService bookService = BookService();
+                    bookService.insertBook(book).then((_) {
+                      print("Livre ajouté au panier: ${book.name}");
+                    });
+                    
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(

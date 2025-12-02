@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
+  static bool _ffiInitialized = false;
 
   static const String _databaseName = 'FDTP.db';
   static const int _databaseVersion = 1;
@@ -16,7 +19,19 @@ class DatabaseHelper {
 
   DatabaseHelper._internal();
 
+  /// Initialiser FFI pour Linux/Windows desktop
+  static void _initFfi() {
+    if (!_ffiInitialized) {
+      if (Platform.isLinux || Platform.isWindows) {
+        sqfliteFfiInit();
+        databaseFactory = databaseFactoryFfi;
+      }
+      _ffiInitialized = true;
+    }
+  }
+
   Future<Database> get database async {
+    _initFfi();
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
