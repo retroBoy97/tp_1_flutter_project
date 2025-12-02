@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'screens/signup_screen.dart';
-import 'screens/HomeScreen/home_screen.dart';
-import 'screens/DetailsScreen/details_screen.dart';
-import 'screens/Library/library_screen.dart';
-import 'screens/basket_screen.dart';
-import 'screens/bottom_nav_bar.dart';
-import 'screens/tab_bar_screen.dart';
+import 'Screens/signup_screen.dart';
+import 'Screens/HomeScreen/home_screen.dart';
+import 'Screens/DetailsScreen/details_screen.dart';
+import 'Screens/Library/library_screen.dart';
+import 'Screens/basket_screen.dart';
+import 'Screens/bottom_nav_bar.dart';
+import 'Screens/tab_bar_screen.dart';
 import 'models/book.dart';
 
 void main() {
