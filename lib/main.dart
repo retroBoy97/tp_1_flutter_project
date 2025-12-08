@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Screens/signup_screen.dart';
 import 'Screens/HomeScreen/home_screen.dart';
 import 'Screens/DetailsScreen/details_screen.dart';
@@ -6,6 +8,7 @@ import 'Screens/Library/library_screen.dart';
 import 'Screens/basket_screen.dart';
 import 'Screens/bottom_nav_bar.dart';
 import 'Screens/tab_bar_screen.dart';
+import 'Screens/firebase_users_screen.dart';
 import 'models/book.dart';
 import 'models/user.dart';
 import 'services/user_service.dart';
@@ -13,10 +16,18 @@ import 'services/user_service.dart';
 void main() async {
   // Nécessaire pour utiliser SharedPreferences avant runApp
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // TEST SHARED PREFERENCES
-  await testSharedPreferences();
-  
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+
+  // Enable offline persistence
+  FirebaseFirestore.instance.settings = const Settings(
+    persistenceEnabled: true,
+  );
+
+  // TEST SHARED PREFERENCES (commented for Firebase exercise)
+  // await testSharedPreferences();
+
   runApp(const MyApp());
 }
 
@@ -65,7 +76,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // Page affichée au lancement
-      initialRoute: SignUpScreen.routeName,
+      // initialRoute: SignUpScreen.routeName,  // Commented for Firebase exercise
+      initialRoute: FirebaseUsersScreen.routeName,
 
       // Déclaration des routes
       routes: {
@@ -76,6 +88,7 @@ class MyApp extends StatelessWidget {
         BasketScreen.routeName: (context) => const BasketScreen(),
         BottomNavBar.routeName: (context) => BottomNavBar(books: sampleBooks),
         TabBarScreen.routeName: (context) => TabBarScreen(books: sampleBooks),
+        FirebaseUsersScreen.routeName: (context) => const FirebaseUsersScreen(),
       },
     );
   }
