@@ -1,30 +1,38 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import '../models/quote.dart';
+import '../services/quote_api_service.dart';
 
-class QuoteScreen extends StatefulWidget {
-  const QuoteScreen({super.key});
+class QuoteScreenRetrofit extends StatefulWidget {
+  const QuoteScreenRetrofit({super.key});
 
   @override
-  State<QuoteScreen> createState() => _QuoteScreenState();
+  State<QuoteScreenRetrofit> createState() => _QuoteScreenRetrofitState();
 }
 
-class _QuoteScreenState extends State<QuoteScreen> {
-  static const address = 'https://zenquotes.io/api/random';
+class _QuoteScreenRetrofitState extends State<QuoteScreenRetrofit> {
   Quote? _quote;
   bool _isLoading = false;
+  late QuoteApiService _apiService;
+
+  @override
+  void initState() {
+    super.initState();
+    final dio = Dio();
+    _apiService = QuoteApiService(dio);
+    _loadQuote();
+  }
 
   Future<Quote> _fetchQuote() async {
-    final Uri url = Uri.parse(address);
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final List quoteJson = json.decode(response.body);
-      Quote quote = Quote.fromJSON(quoteJson[0]);
-      return quote;
-    } else {
-      return Quote(text: 'Error retrieving quote', author: '');
+    try {
+      final quotes = await _apiService.getRandomQuote();
+      if (quotes.isNotEmpty) {
+        return quotes[0];
+      } else {
+        return Quote(text: 'No quote available', author: '');
+      }
+    } catch (e) {
+      return Quote(text: 'Error: $e', author: '');
     }
   }
 
@@ -42,16 +50,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _loadQuote();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quote of the Day'),
+        title: const Text('Quote with Retrofit'),
         centerTitle: true,
       ),
       body: Center(
@@ -64,10 +66,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Using HTTP Package',
+                          'Using Retrofit + Dio',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.orange,
+                            color: Colors.green,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

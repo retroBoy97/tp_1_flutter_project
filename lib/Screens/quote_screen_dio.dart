@@ -1,30 +1,33 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import '../models/quote.dart';
 
-class QuoteScreen extends StatefulWidget {
-  const QuoteScreen({super.key});
+class QuoteScreenDio extends StatefulWidget {
+  const QuoteScreenDio({super.key});
 
   @override
-  State<QuoteScreen> createState() => _QuoteScreenState();
+  State<QuoteScreenDio> createState() => _QuoteScreenDioState();
 }
 
-class _QuoteScreenState extends State<QuoteScreen> {
+class _QuoteScreenDioState extends State<QuoteScreenDio> {
   static const address = 'https://zenquotes.io/api/random';
   Quote? _quote;
   bool _isLoading = false;
+  final Dio _dio = Dio();
 
   Future<Quote> _fetchQuote() async {
-    final Uri url = Uri.parse(address);
-    final response = await http.get(url);
+    try {
+      final response = await _dio.get(address);
 
-    if (response.statusCode == 200) {
-      final List quoteJson = json.decode(response.body);
-      Quote quote = Quote.fromJSON(quoteJson[0]);
-      return quote;
-    } else {
-      return Quote(text: 'Error retrieving quote', author: '');
+      if (response.statusCode == 200) {
+        final List quoteJson = response.data;
+        Quote quote = Quote.fromJson(quoteJson[0]);
+        return quote;
+      } else {
+        return Quote(text: 'Error retrieving quote', author: '');
+      }
+    } catch (e) {
+      return Quote(text: 'Error: $e', author: '');
     }
   }
 
@@ -51,7 +54,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quote of the Day'),
+        title: const Text('Quote with Dio'),
         centerTitle: true,
       ),
       body: Center(
@@ -64,10 +67,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Using HTTP Package',
+                          'Using Dio',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.orange,
+                            color: Colors.blue,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -99,5 +102,11 @@ class _QuoteScreenState extends State<QuoteScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _dio.close();
+    super.dispose();
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'quote_screen.dart';
+import 'quote_screen_dio.dart';
+import 'quote_screen_retrofit.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -56,7 +58,49 @@ class IntroScreen extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'View Quote',
+                  'Quote (HTTP)',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QuoteScreenDio(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
+                  ),
+                ),
+                child: const Text(
+                  'Quote (Dio)',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QuoteScreenRetrofit(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15,
+                  ),
+                ),
+                child: const Text(
+                  'Quote (Retrofit)',
                   style: TextStyle(fontSize: 18),
                 ),
               ),

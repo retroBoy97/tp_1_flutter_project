@@ -6,6 +6,8 @@ import 'basket_screen.dart';
 import 'custom_drawer.dart';
 import 'tab_bar_screen.dart';
 import 'quote_screen.dart';
+import 'quote_screen_dio.dart';
+import 'quote_screen_retrofit.dart';
 
 class BottomNavBar extends StatefulWidget {
   static const String routeName = "/bottomNavBar";
@@ -51,13 +53,35 @@ class _BottomNavBarState extends State<BottomNavBar> {
             },
           ),
           DrawerItem(
-            title: "Quote of the Day",
+            title: "Quote (HTTP)",
             icon: const Icon(Icons.format_quote),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const QuoteScreen()),
+              );
+            },
+          ),
+          DrawerItem(
+            title: "Quote (Dio)",
+            icon: const Icon(Icons.format_quote_outlined),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuoteScreenDio()),
+              );
+            },
+          ),
+          DrawerItem(
+            title: "Quote (Retrofit)",
+            icon: const Icon(Icons.auto_awesome_outlined),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuoteScreenRetrofit()),
               );
             },
           ),
