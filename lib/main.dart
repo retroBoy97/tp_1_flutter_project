@@ -76,8 +76,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       // Page affichée au lancement
-      // initialRoute: SignUpScreen.routeName,  // Commented for Firebase exercise
-      initialRoute: FirebaseUsersScreen.routeName,
+      initialRoute: SignUpScreen.routeName,  // Commented for Firebase exercise
+      // initialRoute: FirebaseUsersScreen.routeName,
 
       // Déclaration des routes
       routes: {

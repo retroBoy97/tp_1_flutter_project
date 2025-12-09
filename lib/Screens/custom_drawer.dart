@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
-class CustomDrawer extends StatelessWidget {
-  final String buttonTitle;
+class DrawerItem {
+  final String title;
   final Icon icon;
-  final VoidCallback callback;
+  final VoidCallback onTap;
 
-  const CustomDrawer(this.buttonTitle, this.icon, this.callback, {super.key});
+  DrawerItem({
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
+}
+
+class CustomDrawer extends StatelessWidget {
+  final List<DrawerItem> items;
+
+  const CustomDrawer({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +75,33 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: icon,
-                title: Text(
-                  buttonTitle,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onTap: callback,
-                tileColor: Colors.grey[100],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 4.0,
+                    ),
+                    child: ListTile(
+                      leading: item.icon,
+                      title: Text(
+                        item.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      onTap: item.onTap,
+                      tileColor: Colors.grey[100],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],

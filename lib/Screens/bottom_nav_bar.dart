@@ -5,6 +5,7 @@ import 'Library/library_screen.dart';
 import 'basket_screen.dart';
 import 'custom_drawer.dart';
 import 'tab_bar_screen.dart';
+import 'quote_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   static const String routeName = "/bottomNavBar";
@@ -41,11 +42,26 @@ class _BottomNavBarState extends State<BottomNavBar> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: CustomDrawer(
-        "Tab Navigation",
-        const Icon(Icons.tab),
-        () {
-          Navigator.pushReplacementNamed(context, TabBarScreen.routeName);
-        },
+        items: [
+          DrawerItem(
+            title: "Tab Navigation",
+            icon: const Icon(Icons.tab),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, TabBarScreen.routeName);
+            },
+          ),
+          DrawerItem(
+            title: "Quote of the Day",
+            icon: const Icon(Icons.format_quote),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QuoteScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: pages[mCurrentIndex],
       bottomNavigationBar: BottomNavigationBar(
